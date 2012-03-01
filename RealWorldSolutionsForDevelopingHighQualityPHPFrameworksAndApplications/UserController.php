@@ -1,17 +1,19 @@
 <?php
 
-require_once 'CryptHelper.php';
 require_once 'View.php';
 require_once 'ErrorView.php';
 
 class UserController
 {
     protected $gateway;
+    protected $mailer;
+    protected $cryptHelper;
 
-    public function __construct(TableDataGateway $gateway, Mailer $mailer)
+    public function __construct(TableDataGateway $gateway, Mailer $mailer, CryptHelper $cryptHelper)
     {
         $this->gateway = $gateway;
         $this->mailer = $mailer;
+        $this->cryptHelper = $cryptHelper;
     }
 
     public function resetPasswordAction()
@@ -31,7 +33,7 @@ class UserController
             );
         }
 
-        $code = CryptHelper::getConfirmationCode();
+        $code = $this->cryptHelper->getConfirmationCode();
         $this->gateway->updateUserWithConfirmationCode(
             $_POST['email'], $code
         );
