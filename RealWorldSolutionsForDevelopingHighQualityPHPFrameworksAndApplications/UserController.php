@@ -3,15 +3,15 @@
 require_once 'CryptHelper.php';
 require_once 'View.php';
 require_once 'ErrorView.php';
-require_once 'UsersTableDataGateway.php';
 
 class UserController
 {
     protected $gateway;
 
-    public function __construct(TableDataGateway $gateway)
+    public function __construct(TableDataGateway $gateway, Mailer $mailer)
     {
         $this->gateway = $gateway;
+        $this->mailer = $mailer;
     }
 
     public function resetPasswordAction()
@@ -37,7 +37,7 @@ class UserController
         );
 
 
-        mail(
+        $this->mailer->send(
             $_POST['email'],
             'Password Reset',
             'Confirmation code: ' . $code
