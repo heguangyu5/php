@@ -10,7 +10,7 @@
 
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="80"/>
+            <property name="lineLimit" value="120"/>
             <property name="absoluteLineLimit" value="120"/>
         </properties>
     </rule>
@@ -45,7 +45,6 @@
 
     <rule ref="PEAR.NamingConventions.ValidClassName"/>
     <rule ref="PEAR.NamingConventions.ValidFunctionName"/>
-    <rule ref="PEAR.NamingConventions.ValidVariableName"/>
 
     <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent"/>
     <rule ref="PEAR.WhiteSpace.ScopeClosingBrace"/>
