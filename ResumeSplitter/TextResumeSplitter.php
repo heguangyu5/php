@@ -5,7 +5,7 @@
 class TextResumeSplitter
 {
     protected $textResume;
-    
+
     protected $seperators = array(
         'basicInfo'             => '基本信息',
         'selfAssessment'        => '自我评价',
@@ -14,28 +14,28 @@ class TextResumeSplitter
         'educationBackground'   => '教育背景',
         'languageSkills'        => '语言能力'
     );
-    
+
     protected $parts = array(
         'topLines' => array()
     );
-    
+
     public function setTextResume($textResume)
     {
         $this->textResume = (string) $textResume;
         return $this;
     }
-    
-    protected function identifySeperator($line) 
+
+    protected function identifySeperator($line)
     {
         return array_search($line, $this->seperators);
     }
-    
+
     public function doSplit()
     {
         if (null === $this->textResume) {
             return;
         }
-        
+
         $lines = explode("\n", $this->textResume);
         $currentSeperator = null;
         while($lines) {
@@ -52,12 +52,14 @@ class TextResumeSplitter
             }
             $this->parts['topLines'][] = $line;
         }
-        
+
         foreach ($this->parts as $key => $lines) {
             $this->parts[$key] = implode("\n", $lines);
         }
+
+        return $this;
     }
-    
+
     public function getPart($key)
     {
         if (isset($this->parts[$key])) {

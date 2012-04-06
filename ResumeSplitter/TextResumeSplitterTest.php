@@ -7,7 +7,7 @@ class TextResumeSplitterTest extends PHPUnit_Framework_TestCase
 {
     public function testDoSplit()
     {
-        $textResume =<<< TEXT_RESUME
+        $textResume =<<<TEXT_RESUME
 男 |40岁|北京朝阳区| 本科 | 十九年以上工作经验
 基本信息
 姓名： 张大胆 性别： 男 出生日期： 1988年4月1日
@@ -25,7 +25,7 @@ TEXT_RESUME;
         $splitter = new TextResumeSplitter();
         $splitter->setTextResume($textResume)
                  ->doSplit();
-        
+
         $this->assertEquals(
             '男 |40岁|北京朝阳区| 本科 | 十九年以上工作经验',
             $splitter->getPart('topLines')

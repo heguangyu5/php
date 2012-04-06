@@ -2,8 +2,15 @@
 
 require_once 'TextResumeSplitter.php';
 
+/**
+ * A demo to show how to extend TextResumeSplitter to meet your own needs
+ */
 class MyTextResumeSplitter extends TextResumeSplitter
 {
+    /**
+     * Step 1: override $seperators to your own, you can also extend it in __construct, just as you like.
+     *         I override $seperators in this demo
+     */
     protected $seperators = array(
         array('基本信息', '一、基本信息：'),
         '自我评价',
@@ -23,7 +30,12 @@ class MyTextResumeSplitter extends TextResumeSplitter
         '六、外语能力与国际交流经验',
         '七、性格特征：'
     );
-    
+
+    /**
+     * Step 2: if your seperator structure same as TextResumeSplitter, you don't need write your own
+     *         identifySeperator() method. In this demo, $seperators structure changed, so I implement
+     *         my own identifySeperator() method to identify lines.
+     */
     protected function identifySeperator($line)
     {
         foreach ($this->seperators as $key => $seperator) {
