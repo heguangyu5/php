@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+    CALSCALE:GREGORIAN (阳历)
+    PRODID:-//OurATS Corporation//OurATS Calendar//EN
+    VERSION:2.0
+    METHOD:REQUEST (安排/更新时为REQUEST, 取消时为CANCEL)
+        BEGIN:VEVENT
+        UID:uid114 (event的唯一识别标记, 更新和取消时就是拿这个uid识别以前的event的)
+        DTSTAMP:20120829T085222Z (event的创建时间)
+        DTSTART:20120829T100000Z (event的开始时间)
+        DTEND:20120829T103000Z (event的结束时间)
+        TRANSP:OPAQUE (参看下边对 TRANSP 的描述)
+        SEQUENCE:0 (安排时为0,后续每更新一次,值+1)
+        SUMMARY:test summay update (推荐填写该项,虽然没有的话影响不大,但是还是有吧)
+        LOCATION:office update (推荐填写该项,虽然没有的话影响不大,但是还是有吧)
+        CATEGORIES:INTERVIEW (日历事件类型)
+        CLASS:PUBLIC
+        ORGANIZER;CN=Employee001(Employee001@126.com):MAILTO:Employee001@126.com (event的组织者/发起人,如果该event是发送给组织者本人的,该项必须填写另一个email地址,不然gmail不识别,还有就是这个email地址必须是个域名有效的email地址,这样才会显示CN指定的名字)
+        DESCRIPTION: description update (可选项)
+        ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;
+         RSVP=TRUE;CN=何广宇;LANGUAGE=en:MAILTO:heguangyu5@gmail.com (PARTSTAT的值有两个ACCEPTED/NEEDS-ACTION, 如果设为ACCEPTED,该event会自动添加到参与者的日历中;如果设为NEEDS-ACTION, 则会给出选项:是/否/不确定. LANGUAGE必须有,不然识别calendar失败, 参看下边对 ATTENDEE 的描述)
+        STATUS:REQUEST (如果METHOD为REQUEST,这个是CONFIRMED,如果METHOD为CANCEL,这个是CANCELLED,参看下边对 STATUS 的描述)
+        END:VEVENT
+END:VCALENDAR
+
+
+==================================================================================
+TRANSP:  Time Transparency is the characteristic of an event
+      that determines whether it appears to consume time on a calendar.
+      Events that consume actual time for the individual or resource
+      associated with the calendar SHOULD be recorded as OPAQUE,
+      allowing them to be detected by free/busy time searches.  Other
+      events, which do not take up the individual's (or resource's) time
+      SHOULD be recorded as TRANSPARENT, making them invisible to free/
+      busy time searches.
+
+STATUS:  In a group-scheduled calendar component, the property
+      is used by the "Organizer" to provide a confirmation of the event
+      to the "Attendees".  For example in a "VEVENT" calendar component,
+      the "Organizer" can indicate that a meeting is tentative,
+      confirmed, or cancelled.  In a "VTODO" calendar component, the
+      "Organizer" can indicate that an action item needs action, is
+      completed, is in process or being worked on, or has been
+      cancelled.  In a "VJOURNAL" calendar component, the "Organizer"
+      can indicate that a journal entry is draft, final, or has been
+      cancelled or removed.
+
+ATTENDEE: The property parameter "CN" is for the common or displayable name
+      associated with the calendar address; "ROLE", for the intended
+      role that the attendee will have in the calendar component;
+      "PARTSTAT", for the status of the attendee's participation;
+      "RSVP", for indicating whether the favor of a reply is requested;
+      "CUTYPE", to indicate the type of calendar user; If the 
+      "LANGUAGE" property parameter is specified, the identified
+      language applies to the "CN" parameter.
