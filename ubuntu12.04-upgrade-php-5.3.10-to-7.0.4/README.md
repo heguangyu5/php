@@ -20,9 +20,8 @@
 5. 默认phpize的安装路径是/usr/local/bin/phpize, 同样由于 $PATH 里 /usr/local/bin 优先于 /usr/bin, 所以现在phpize已经是php7的了
 6. 默认php-config的安装路径是/usr/local/bin/php-config, 同phpize, 现在php-config也已经是php7的了
 7. 默认安装了pear, 我们不需要, --without-pear
-8. 默认安装了phar, 我们不需要, --disable-phar
-9. 默认pdo已经启用了,我们想要编译成扩展加载, --disable-pdo
-10. 默认不启用mysqlnd,我们编译pdo_mysql时需要它, --enable-mysqlnd
+8. 默认pdo已经启用了,我们想要编译成扩展加载, --disable-pdo
+9. 默认不启用mysqlnd,我们编译pdo_mysql时需要它, --enable-mysqlnd
 
 **3. 准备好配置文件目录**
 
@@ -39,7 +38,6 @@
         --enable-phpdbg=no \
         --disable-cgi \
         --without-pear \
-        --disable-phar \
         --disable-pdo \
         --enable-mysqlnd \
         --with-config-file-path=/etc/php7/cli \
@@ -47,7 +45,8 @@
         --enable-mbstring \
         --enable-exif \
         --enable-sockets \
-        --with-openssl
+        --with-openssl \
+        --with-zlib
     make
     sudo make install
     sudo cp php.ini-production /etc/php7/cli/php.ini
@@ -59,7 +58,6 @@
         --enable-phpdbg=no \
         --disable-cgi \
         --without-pear \
-        --disable-phar \
         --disable-cli \
         --disable-pdo \
         --enable-mysqlnd \
@@ -69,7 +67,8 @@
         --enable-mbstring \
         --enable-exif \
         --enable-sockets \
-        --with-openssl
+        --with-openssl \
+        --with-zlib
     make
     sudo make install
     sudo cp php.ini-production /etc/php7/apache2/php.ini
