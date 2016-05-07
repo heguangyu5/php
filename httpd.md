@@ -12,7 +12,7 @@
     httpd -k start|stop|restart|graceful|graceful-stop
     httpd -t
 
-# cgi-bin
+## cgi-bin
 
 一个c语言的例子
 
@@ -44,7 +44,7 @@
     clang a.c
     http://localhost:8888/cgi-bin/a.out
 
-# httpd.conf
+## httpd.conf
 
     User daemon
     Group daemon
@@ -84,3 +84,19 @@
     mime_module
     AddHandler cgi-script .cgi  // 把一个扩展名和一个handler关联起来,比如要想让cgi-bin/a.out在htdocs里也能运行
                                 // 就得 cp cgi-bin/a.out htdocs/a.cgi
+
+# 源码分析
+
+    @see The Apache Modules Book: Application Development with Apache (Nick Kew)
+    @see http://dev.ariel-networks.com/apr/apr-tutorial/html/apr-tutorial.html
+
+    struct process_rec {
+        apr_pool_t *pool;
+        apr_pool_t *pconf;
+        int argc;
+        const char * const *argv;
+        const char *short_name;
+    }
+
+    httpd的main入口定义在 server/main.c#0442
+    init_process() 先创建一个 process pool, 又创建一个 pconf subpool, 然后从 argv[0] 里取得启动httpd命令里的文件名做为short_name,初始化好了 process_rec.
